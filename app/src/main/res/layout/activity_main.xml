@@ -11,6 +11,6 @@
         android:id="@+id/btnSmart"
         android:text="SmartRefreshLayout上拉加载和刷新"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

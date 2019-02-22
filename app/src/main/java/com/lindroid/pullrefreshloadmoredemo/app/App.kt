@@ -9,5 +9,15 @@ import android.app.Application
  * @Description
  */
 class App:Application() {
+    init {
+        instance = this
+    }
 
+    companion object {
+        lateinit var instance: App
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+    }
 }
