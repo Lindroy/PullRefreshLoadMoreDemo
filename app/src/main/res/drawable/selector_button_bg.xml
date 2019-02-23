@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--蓝色按钮按下效果的选择器-->
+    <item android:state_enabled="true">
+        <selector>
+            <item android:state_pressed="false">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/com_button_radius" />
+                    <solid android:color="@color/color_button_com_normal" />
+                </shape>
+            </item>
+            <item android:state_pressed="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/com_button_radius" />
+                    <solid android:color="@color/color_button_com_normal" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/com_button_radius" />
+            <solid android:color="@color/color_button_com_normal" />
+        </shape>
+    </item>
+</selector>

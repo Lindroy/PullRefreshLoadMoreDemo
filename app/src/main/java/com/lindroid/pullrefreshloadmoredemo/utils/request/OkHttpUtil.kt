@@ -7,6 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 /**
  * @author Lin
@@ -16,11 +17,12 @@ import java.io.IOException
  */
 
  const val TAG = "OkHttp"
-private val mHandler = android.os.Handler()
 
 
 inline fun <reified T :Any> BaseRequestParams.post(callback: OnOkHttpCallback) {
-    val okHttpClient = OkHttpClient()
+    val okHttpClient = OkHttpClient.Builder()
+        .connectTimeout(5, TimeUnit.SECONDS)
+        .build()
     val form = FormBody.Builder()
     if (params.isNotEmpty()) {
         for (entry in params) {
@@ -32,9 +34,11 @@ inline fun <reified T :Any> BaseRequestParams.post(callback: OnOkHttpCallback) {
     val call = okHttpClient.newCall(request)
     call.enqueue(object : Callback {
         override fun onFailure(call: Call, e: IOException) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+            Handler(Looper.getMainLooper()).post {
+                callback.onFailure(-100, "网络异常")
+            }
 
+        }
 
         override fun onResponse(call: Call, response: Response) {
             when (response.isSuccessful) {

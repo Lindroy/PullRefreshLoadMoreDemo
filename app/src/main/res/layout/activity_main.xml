@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
+        android:textAllCaps="false"
         android:id="@+id/btnSmart"
         android:text="SmartRefreshLayout上拉加载和刷新"
         android:layout_width="match_parent"
