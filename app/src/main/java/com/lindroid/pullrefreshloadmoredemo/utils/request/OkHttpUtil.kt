@@ -16,8 +16,7 @@ import java.util.concurrent.TimeUnit
  * @Description
  */
 
- const val TAG = "OkHttp"
-
+const val TAG = "OkHttp"
 
 inline fun <reified T :Any> BaseRequestParams.post(callback: OnOkHttpCallback) {
     val okHttpClient = OkHttpClient.Builder()
@@ -52,7 +51,10 @@ inline fun <reified T :Any> BaseRequestParams.post(callback: OnOkHttpCallback) {
                 }
                 false -> {
                     Log.d(TAG, "请求失败")
-                    callback.onFailure(response.code(), response.message())
+                    Handler(Looper.getMainLooper()).post {
+                        callback.onFailure(response.code(), response.message())
+                    }
+
                 }
             }
         }

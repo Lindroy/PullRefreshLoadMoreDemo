@@ -33,7 +33,23 @@ class BaseSimpleAdapter<T>(@LayoutRes layoutId: Int, private val convertListener
     override fun convert(helper: BaseViewHolder, item: T) {
         convertListener.invoke(helper, item)
     }
+}
 
+/**
+ * BaseQuickAdapter实现下拉加载更多功能
+ */
+fun <T : Any> BaseQuickAdapter<T, BaseViewHolder>.finishLoadMore(newData: List<T>, pageNo: Int) {
+    if (pageNo == 1) {
+        data.clear()
+        setNewData(newData)
+    } else {
+        addData(newData)
+        if (newData.isNotEmpty()) {
+            loadMoreComplete()
+        } else {
+            loadMoreEnd()
+        }
+    }
 }
 
 

@@ -15,6 +15,12 @@ import com.lindroid.utils.shortToast
 import kotlinx.android.synthetic.main.activity_smart_refresh.*
 
 
+/**
+ * @author Lin
+ * @date 2019/2/25
+ * @function SmartRefreshLayout实现下拉刷新和上拉加载
+ * @Description
+ */
 class SmartRefreshActivity : AppCompatActivity() {
     private var pageNo = START_PAGE_NO
 

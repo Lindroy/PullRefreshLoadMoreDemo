@@ -12,5 +12,8 @@ class MainActivity : AppCompatActivity() {
         btnSmart.setOnClickListener {
             launchActivity<SmartRefreshActivity>()
         }
+        btnQuick.setOnClickListener {
+            launchActivity<QuickAdapterActivity>()
+        }
     }
 }

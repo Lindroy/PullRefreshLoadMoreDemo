@@ -14,4 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:textAllCaps="false"
+        android:id="@+id/btnQuick"
+        android:text="QuickAdapter上拉加载和刷新"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
