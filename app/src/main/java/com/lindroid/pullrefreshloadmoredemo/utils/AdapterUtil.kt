@@ -49,7 +49,8 @@ fun <T : Any> BaseQuickAdapter<T, BaseViewHolder>.finishLoadMore(newData: List<T
         if (newData.isNotEmpty()) {
             loadMoreComplete()
         } else {
-            loadMoreEnd()
+            //false表示会显示“没有更多数据了”的底部布局
+            loadMoreEnd(false)
         }
     }
 }

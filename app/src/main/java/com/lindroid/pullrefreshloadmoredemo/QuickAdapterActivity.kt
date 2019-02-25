@@ -12,6 +12,7 @@ import com.lindroid.pullrefreshloadmoredemo.request.MovieRequest
 import com.lindroid.pullrefreshloadmoredemo.utils.*
 import com.lindroid.pullrefreshloadmoredemo.utils.request.OnOkHttpCallback
 import com.lindroid.pullrefreshloadmoredemo.utils.request.post
+import com.lindroid.pullrefreshloadmoredemo.view.CustomLoadMoreView
 import com.lindroid.utils.isNetworkConnect
 import com.lindroid.utils.shortToast
 import kotlinx.android.synthetic.main.activity_quick_adapter.*
@@ -44,6 +45,7 @@ class QuickAdapterActivity : AppCompatActivity() {
         adapter = BaseSimpleAdapter(android.R.layout.simple_list_item_1) { helper, item ->
             helper.setText(android.R.id.text1, item.title)
         }
+        adapter.setLoadMoreView(CustomLoadMoreView())
         rvMovie.adapter = adapter
     }
 

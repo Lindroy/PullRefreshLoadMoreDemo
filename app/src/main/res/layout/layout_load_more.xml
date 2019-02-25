@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+    <!--设置成统一的高度体验更好-->
+
+    <FrameLayout
+        android:id="@+id/load_more_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/load_more_load_fail"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:textSize="14sp"
+        android:textColor="@color/colorPrimary"
+        android:text="重新加载"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/load_more_load_end"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:text="没有更多数据了"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>
