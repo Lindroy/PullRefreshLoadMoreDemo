@@ -42,6 +42,8 @@ fun <T : Any> BaseQuickAdapter<T, BaseViewHolder>.finishLoadMore(newData: List<T
     if (pageNo == 1) {
         data.clear()
         setNewData(newData)
+        //列表没有填满一页时不能上拉加载
+        disableLoadMoreIfNotFullPage()
     } else {
         addData(newData)
         if (newData.isNotEmpty()) {
