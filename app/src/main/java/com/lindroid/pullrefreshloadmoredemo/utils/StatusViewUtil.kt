@@ -2,20 +2,18 @@ package com.lindroid.pullrefreshloadmoredemo.utils
 
 import com.classic.common.MultipleStatusView
 import com.lindroid.utils.isNetworkConnect
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
 
 /**
  * @author Lin
  * @date 2019/2/22
- * @function
+ * @function MultipleStatusView工具类
  * @Description
  */
 
 /**
  * 显示加载中视图
  */
-fun MultipleStatusView.showLoadingView(refreshLayout: SmartRefreshLayout? = null) {
-    refreshLayout?.setEnableRefresh(false)
+fun MultipleStatusView.showLoadingView() {
     showLoading()
 }
 
@@ -46,7 +44,9 @@ fun MultipleStatusView.showSuccessView(isEmptyData: Boolean) {
 
 /**
  * 请求失败，分为错误和网络断开
+ * @param isOldDataEmpty: 页面中是否已存在数据，传入true时不会显示失败视图
  */
+@JvmOverloads
 fun MultipleStatusView.showFailedView(isOldDataEmpty: Boolean = false) {
     if (isOldDataEmpty) {
         when (context.isNetworkConnect()) {

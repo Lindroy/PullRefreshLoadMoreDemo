@@ -14,6 +14,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 
 /**
  * 请求成功时刷新列表
+ * @param canEmptyRefresh: 页面数据为空时是否允许上拉和下拉
  */
 fun <T : Any> SmartRefreshLayout.refreshWhenSuccess(
     adapter: BaseQuickAdapter<T, BaseViewHolder>,
@@ -26,6 +27,7 @@ fun <T : Any> SmartRefreshLayout.refreshWhenSuccess(
         true -> {
             adapter.data.clear()
             adapter.setNewData(newData)
+            //是否可以下拉和上拉，综合canEmptyRefresh和页面数据是否为空判断
             val enableRefreshAndLoad = canEmptyRefresh || adapter.data.isNotEmpty()
             setEnableRefresh(enableRefreshAndLoad)
             setEnableLoadMore(adapter.data.isNotEmpty())
