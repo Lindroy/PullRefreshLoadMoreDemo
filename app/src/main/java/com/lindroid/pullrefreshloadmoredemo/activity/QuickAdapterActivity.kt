@@ -1,12 +1,11 @@
-package com.lindroid.pullrefreshloadmoredemo
+package com.lindroid.pullrefreshloadmoredemo.activity
 
-import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.widget.LinearLayout
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.lindroid.pullrefreshloadmoredemo.R
+import com.lindroid.pullrefreshloadmoredemo.START_PAGE_NO
+import com.lindroid.pullrefreshloadmoredemo.base.BaseActivity
 import com.lindroid.pullrefreshloadmoredemo.bean.MovieBean
 import com.lindroid.pullrefreshloadmoredemo.request.MovieRequest
 import com.lindroid.pullrefreshloadmoredemo.utils.*
@@ -25,31 +24,29 @@ private const val TAG = "QuickAdapterActivity"
  * @function SwipeRefreshLayout+BaseQuickAdapter实现上拉加载下拉刷新
  * @Description
  */
-class QuickAdapterActivity : AppCompatActivity() {
-    private var pageNo = 1
-    private lateinit var adapter: BaseQuickAdapter<MovieBean.Subject, BaseViewHolder>
-//    protected val newDatas: MutableList<MovieBean.Subject> = ArrayList()
+class QuickAdapterActivity(override val contentViewId: Int = R.layout.activity_quick_adapter) :
+    BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quick_adapter)
+    override fun initView() {
+        super.initView()
+        initToolBar(R.string.refresh_load_quick_adapter)
         swMovie.setColorSchemeResources(R.color.colorPrimary)
         rvMovie.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
-
         initAdapter()
-        initListener()
+
+    }
+
+    override fun initData() {
+        super.initData()
         getDataList(isShowLoading = true)
     }
 
     private fun initAdapter() {
-        adapter = BaseSimpleAdapter(android.R.layout.simple_list_item_1) { helper, item ->
-            helper.setText(android.R.id.text1, item.title)
-        }
         adapter.setLoadMoreView(CustomLoadMoreView())
         rvMovie.adapter = adapter
     }
 
-    private fun initListener() {
+    override fun initOnClick() {
         swMovie.setOnRefreshListener {
             pageNo = 1
             getDataList()
@@ -104,17 +101,6 @@ class QuickAdapterActivity : AppCompatActivity() {
         }, 1500)
     }
 
-    private fun createData(pageSize: Int): List<MovieBean.Subject> {
-        val newDatas: MutableList<MovieBean.Subject> = ArrayList()
-        if (pageSize == 0 || pageNo > 1 + 2) {
-            newDatas.addAll(listOf())
-        } else {
-            for (i in (1..pageSize)) {
-                newDatas.add(MovieBean.Subject(title = "电影${(pageNo - 1) * 20 + i}"))
-            }
-        }
-        return newDatas
-    }
 
     /**
      * 获取电影数据

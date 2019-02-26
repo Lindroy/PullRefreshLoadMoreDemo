@@ -14,9 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".QuickAdapterActivity"></activity>
-        <activity android:name=".SmartRefreshActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.SmartQuickActivity"></activity>
+        <activity android:name=".activity.QuickAdapterActivity" />
+        <activity android:name=".activity.SmartRefreshActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

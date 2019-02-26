@@ -37,8 +37,13 @@ class BaseSimpleAdapter<T>(@LayoutRes layoutId: Int, private val convertListener
 
 /**
  * BaseQuickAdapter实现下拉加载更多功能
+ * @param isGoneEndView:加载完所有的数据时是否去除“没有更多数据了”的底部布局
  */
-fun <T : Any> BaseQuickAdapter<T, BaseViewHolder>.finishLoadMore(newData: List<T>, pageNo: Int) {
+fun <T : Any> BaseQuickAdapter<T, BaseViewHolder>.finishLoadMore(
+    newData: List<T>,
+    pageNo: Int,
+    isGoneEndView: Boolean = false
+) {
     if (pageNo == 1) {
         data.clear()
         setNewData(newData)
@@ -50,7 +55,7 @@ fun <T : Any> BaseQuickAdapter<T, BaseViewHolder>.finishLoadMore(newData: List<T
             loadMoreComplete()
         } else {
             //false表示会显示“没有更多数据了”的底部布局
-            loadMoreEnd(false)
+            loadMoreEnd(isGoneEndView)
         }
     }
 }

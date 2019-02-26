@@ -1,4 +1,4 @@
-package com.lindroid.pullrefreshloadmoredemo
+package com.lindroid.pullrefreshloadmoredemo.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -6,6 +6,8 @@ import android.support.v7.widget.DividerItemDecoration
 import android.widget.LinearLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.lindroid.pullrefreshloadmoredemo.R
+import com.lindroid.pullrefreshloadmoredemo.START_PAGE_NO
 import com.lindroid.pullrefreshloadmoredemo.bean.MovieBean
 import com.lindroid.pullrefreshloadmoredemo.request.MovieRequest
 import com.lindroid.pullrefreshloadmoredemo.utils.*

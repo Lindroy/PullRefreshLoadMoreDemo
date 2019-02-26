@@ -3,7 +3,6 @@ package com.lindroid.pullrefreshloadmoredemo.utils
 import android.support.v4.widget.SwipeRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.lindroid.pullrefreshloadmoredemo.START_PAGE_NO
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 
 /**
@@ -24,7 +23,7 @@ fun <T : Any> SmartRefreshLayout.refreshWhenSuccess(
     canEmptyRefresh: Boolean = true,
     pageSize: Int = 20
 ) {
-    when (pageNo == START_PAGE_NO) {
+    when (pageNo == 1) {
         true -> {
             adapter.data.clear()
             adapter.setNewData(newData)
@@ -67,6 +66,23 @@ fun SmartRefreshLayout.finishLoadMoreWithResult(result: List<Any>, pageSize: Int
     }
 }
 
+
+/**
+ * SmartRefreshLayout+BaseQuickAdapter
+ * SmartRefreshLayout负责下拉刷新，页面没有数据时默认不能下拉刷新，除非手动设置canEmptyRefresh为true
+ */
+fun SmartRefreshLayout.finishRefreshWithAdapter(
+    isEmptyPage: Boolean,
+    canEmptyRefresh: Boolean = false
+) {
+    if (isEmptyPage && !canEmptyRefresh) {
+        setEnableRefresh(false)
+    } else {
+        setEnableRefresh(true)
+        finishRefresh()
+    }
+}
+
 /**
  * SwipeRefreshLayout控件结束下拉刷新
  * 页面没有数据时默认不能下拉刷新，除非手动设置canEmptyRefresh为true
@@ -76,6 +92,9 @@ fun SwipeRefreshLayout.finishRefresh(isEmptyPage: Boolean, canEmptyRefresh: Bool
         isEnabled = false
     } else {
         isEnabled = true
-        isRefreshing = false
+        if (isRefreshing) {
+            isRefreshing = false
+        }
     }
 }
+
