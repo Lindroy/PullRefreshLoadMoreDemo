@@ -64,6 +64,7 @@ class SmartRefreshActivity(override val contentViewId: Int = R.layout.activity_s
         }
     }
 
+
     private fun getDataList(
         pageSize: Int = 20,
         isShowLoading: Boolean = false,
