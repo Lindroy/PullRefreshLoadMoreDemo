@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_smart_quick.*
 /**
  * @author Lin
  * @date 2019/2/26
- * @function
+ * @function SmartRefreshLayout+BaseQuickAdapter实现上拉刷新和下拉加载
  * @Description
  */
 class SmartQuickActivity(override val contentViewId: Int = R.layout.activity_smart_quick) :
@@ -81,7 +81,7 @@ class SmartQuickActivity(override val contentViewId: Int = R.layout.activity_sma
             when (isNetworkConnect()) {
                 true -> {
                     shortToast("请求成功")
-                    adapter.finishLoadMore(newData, pageNo)
+                    adapter.finishUpdateData(newData, pageNo)
                     rfMovie.finishRefreshWithAdapter(adapter.data.isEmpty(), canEmptyRefresh)
 //                    rfMovie.refreshWhenSuccess(adapter,newData,pageNo)
                     statusView.showSuccessView(adapter.data.isEmpty())

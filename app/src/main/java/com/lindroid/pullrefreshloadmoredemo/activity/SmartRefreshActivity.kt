@@ -74,6 +74,7 @@ class SmartRefreshActivity(override val contentViewId: Int = R.layout.activity_s
             statusView.showLoadingView()
         }
         android.os.Handler().postDelayed({
+            //手动控制网络的链接，由于是本地数据，所以无法兼顾到服务器出错的状况
             when (isNetworkConnect()) {
                 true -> {
                     rfMovie.refreshWhenSuccess(

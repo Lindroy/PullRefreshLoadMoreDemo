@@ -13,6 +13,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
  */
 
 /**
+ * SmartRefreshLayout实现下拉刷新和上拉加载
  * 请求成功时刷新列表
  * @param canEmptyRefresh: 页面数据为空时是否允许上拉和下拉
  */
@@ -25,13 +26,18 @@ fun <T : Any> SmartRefreshLayout.refreshWhenSuccess(
 ) {
     when (pageNo == 1) {
         true -> {
-            adapter.data.clear()
+//            adapter.data.clear()
             adapter.setNewData(newData)
-            //是否可以下拉和上拉，综合canEmptyRefresh和页面数据是否为空判断
-            val enableRefreshAndLoad = canEmptyRefresh || adapter.data.isNotEmpty()
-            setEnableRefresh(enableRefreshAndLoad)
+            //是否可以下拉刷新，综合canEmptyRefresh和页面数据是否为空判断
+            val enableRefresh = canEmptyRefresh || adapter.data.isNotEmpty()
+            setEnableRefresh(enableRefresh)
+            if (enableRefresh) {
+                //如果上一步没有禁止下拉刷新，此处应该停止下拉刷新
+                finishRefresh()
+            }
+            //没有数据时禁止上拉加载
             setEnableLoadMore(adapter.data.isNotEmpty())
-            finishRefresh()
+
         }
         false -> {
             adapter.addData(newData)
@@ -70,6 +76,8 @@ fun SmartRefreshLayout.finishLoadMoreWithResult(result: List<Any>, pageSize: Int
 /**
  * SmartRefreshLayout+BaseQuickAdapter
  * SmartRefreshLayout负责下拉刷新，页面没有数据时默认不能下拉刷新，除非手动设置canEmptyRefresh为true
+ * @param isEmptyPage: 页面是否有数据
+ * @param canEmptyRefresh: 页面数据为空是否允许下拉刷新
  */
 fun SmartRefreshLayout.finishRefreshWithAdapter(
     isEmptyPage: Boolean,
@@ -78,8 +86,9 @@ fun SmartRefreshLayout.finishRefreshWithAdapter(
     if (isEmptyPage && !canEmptyRefresh) {
         setEnableRefresh(false)
     } else {
-        setEnableRefresh(true)
         finishRefresh()
+        //需要将下拉刷新打开
+        setEnableRefresh(true)
     }
 }
 

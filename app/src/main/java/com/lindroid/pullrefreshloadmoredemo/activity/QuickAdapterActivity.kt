@@ -86,7 +86,7 @@ class QuickAdapterActivity(override val contentViewId: Int = R.layout.activity_q
             when (isNetworkConnect()) {
                 true -> {
                     shortToast("请求成功")
-                    adapter.finishLoadMore(createData(pageSize), pageNo)
+                    adapter.finishUpdateData(createData(pageSize), pageNo)
                     swMovie.finishRefresh(adapter.data.isEmpty(), canEmptyRefresh)
                     statusView.showSuccessView(adapter.data.isEmpty())
                     pageNo++
