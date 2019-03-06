@@ -79,19 +79,19 @@ class SmartQuickActivity(override val contentViewId: Int = R.layout.activity_sma
         val newData = createData(pageSize)
         Handler().postDelayed({
             when (isNetworkConnect()) {
+                //请求成功
                 true -> {
                     shortToast("请求成功")
                     adapter.finishUpdateData(newData, pageNo)
                     rfMovie.finishRefreshWithAdapter(adapter.data.isEmpty(), canEmptyRefresh)
-//                    rfMovie.refreshWhenSuccess(adapter,newData,pageNo)
                     statusView.showSuccessView(adapter.data.isEmpty())
                     pageNo++
                 }
+                //请求失败
                 false -> {
                     shortToast("网络异常")
                     rfMovie.finishRefreshWithAdapter(adapter.data.isEmpty())
                     statusView.showFailedView(adapter.data.isEmpty())
-//                    rfMovie.refreshWhenFail(adapter.data.isEmpty())
                     adapter.loadMoreFail()
                 }
             }

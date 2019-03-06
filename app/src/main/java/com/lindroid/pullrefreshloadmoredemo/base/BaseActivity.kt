@@ -56,9 +56,12 @@ abstract class BaseActivity : AppCompatActivity() {
         if (pageSize == 0 || pageNo > 1 + 2) {
             newDatas.addAll(listOf())
         } else {
-            for (i in (1..pageSize)) {
+            //为了更接近实际，最后一页的数据数目只有8个
+            val size = if (pageNo == 3) 8 else pageSize
+            for (i in (1..size)) {
                 newDatas.add(MovieBean.Subject(title = "电影${(pageNo - 1) * 20 + i}"))
             }
+
         }
         return newDatas
     }
