@@ -75,6 +75,8 @@ class SmartQuickActivity(override val contentViewId: Int = R.layout.activity_sma
     ) {
         if (isShowLoading) {
             statusView.showLoadingView()
+            //加载时禁止下拉刷新
+            rfMovie.setEnableRefresh(false)
         }
         val newData = createData(pageSize)
         Handler().postDelayed({

@@ -80,6 +80,8 @@ class QuickAdapterActivity(override val contentViewId: Int = R.layout.activity_q
     ) {
         if (isShowLoading) {
             statusView.showLoadingView()
+            //加载时禁止下拉刷新
+            swMovie.isEnabled = false
         }
 
         Handler().postDelayed({

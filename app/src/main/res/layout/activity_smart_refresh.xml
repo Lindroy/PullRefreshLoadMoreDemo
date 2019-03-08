@@ -52,8 +52,6 @@
             </android.support.v7.widget.RecyclerView>
 
         </com.classic.common.MultipleStatusView>
-
-
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 

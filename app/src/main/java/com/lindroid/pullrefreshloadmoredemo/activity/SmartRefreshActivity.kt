@@ -1,5 +1,7 @@
 package com.lindroid.pullrefreshloadmoredemo.activity
 
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.DividerItemDecoration
 import android.widget.LinearLayout
 import com.lindroid.pullrefreshloadmoredemo.R
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_smart_refresh.*
 class SmartRefreshActivity(override val contentViewId: Int = R.layout.activity_smart_refresh) :
     BaseActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun initView() {
         super.initView()
         initToolBar(R.string.refresh_load_smart)
@@ -62,6 +65,8 @@ class SmartRefreshActivity(override val contentViewId: Int = R.layout.activity_s
             pageNo = 1
             getDataList(pageSize = 0, isShowLoading = true, canEmptyRefresh = false)
         }
+
+
     }
 
 
@@ -72,6 +77,8 @@ class SmartRefreshActivity(override val contentViewId: Int = R.layout.activity_s
     ) {
         if (isShowLoading) {
             statusView.showLoadingView()
+            //加载时禁止下拉刷新
+            rfMovie.setEnableRefresh(false)
         }
         android.os.Handler().postDelayed({
             //手动控制网络的链接，由于是本地数据，所以无法兼顾到服务器出错的状况
