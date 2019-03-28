@@ -68,7 +68,6 @@ fun <T : Any> BaseQuickAdapter<T, BaseViewHolder>.finishUpdateData(
  * @param pageNo : 当前页码
  * @param pageSize: 每页加载的数据量
  * @param isGoneEndView: 加载完所有的数据时是否去除“没有更多数据了”的底部布局，默认为false
- *
  */
 fun <T : Any> BaseQuickAdapter<T, BaseViewHolder>.loadMoreDataSuccess(
     newData: List<T>,
