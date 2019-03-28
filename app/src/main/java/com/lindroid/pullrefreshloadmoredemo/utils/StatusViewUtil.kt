@@ -33,12 +33,13 @@ fun MultipleStatusView.showContentView() {
 
 /**
  * 请求成功，分为内容视图和空视图
+ * @param isNewEmptyData: 首次请求到的数据是否为空
  */
-fun MultipleStatusView.showSuccessView(isEmptyData: Boolean) {
-    if (isEmptyData) {
-        showEmptyView()
+fun MultipleStatusView.showSuccessView(isNewEmptyData: Boolean) {
+    if (isNewEmptyData) {
+        showEmpty()
     } else {
-        showContentView()
+        showContent()
     }
 }
 
@@ -46,8 +47,7 @@ fun MultipleStatusView.showSuccessView(isEmptyData: Boolean) {
  * 请求失败，分为错误和网络断开
  * @param isOldDataEmpty: 页面中是否已存在数据，传入true时不会显示失败视图
  */
-@JvmOverloads
-fun MultipleStatusView.showFailedView(isOldDataEmpty: Boolean = false) {
+fun MultipleStatusView.showFailedView(isOldDataEmpty: Boolean) {
     if (isOldDataEmpty) {
         when (context.isNetworkConnect()) {
             true -> showError()

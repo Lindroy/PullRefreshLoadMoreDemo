@@ -14,6 +14,9 @@ class MainActivity(override val contentViewId: Int = R.layout.activity_main) : B
 
     override fun initOnClick() {
         super.initOnClick()
+        btnConvention.setOnClickListener {
+            launchActivity<ConventionActivity>()
+        }
         btnSmart.setOnClickListener {
             launchActivity<SmartRefreshActivity>()
         }

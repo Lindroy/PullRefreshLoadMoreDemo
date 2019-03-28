@@ -60,10 +60,12 @@ class SmartQuickActivity(override val contentViewId: Int = R.layout.activity_sma
 
         btnEmptyRefresh.setOnClickListener {
             pageNo = 1
-            getDataList(0, true, true)
+            adapter.data.clear()
+            getDataList(0, isShowLoading = true, canEmptyRefresh = true)
         }
         btnEmptyNoRefresh.setOnClickListener {
             pageNo = 1
+            adapter.data.clear()
             getDataList(0, isShowLoading = true, canEmptyRefresh = false)
         }
     }
@@ -84,17 +86,26 @@ class SmartQuickActivity(override val contentViewId: Int = R.layout.activity_sma
                 //请求成功
                 true -> {
                     shortToast("请求成功")
-                    adapter.finishUpdateData(newData, pageNo)
-                    rfMovie.finishRefreshWithAdapter(adapter.data.isEmpty(), canEmptyRefresh)
+//                    adapter.finishUpdateData(newData, pageNo)
+                    adapter.loadMoreDataSuccess(newData, pageNo, pageSize)
+                    rfMovie.finishRefreshWithAdapterSuccess(
+                        pageNo,
+                        adapter.data.isEmpty(),
+                        canEmptyRefresh
+                    )
                     statusView.showSuccessView(adapter.data.isEmpty())
                     pageNo++
                 }
                 //请求失败
                 false -> {
                     shortToast("网络异常")
-                    rfMovie.finishRefreshWithAdapter(adapter.data.isEmpty())
+                    rfMovie.finishRefreshWithAdapterFail(
+                        pageNo,
+                        adapter.data.isEmpty(),
+                        canEmptyRefresh
+                    )
                     statusView.showFailedView(adapter.data.isEmpty())
-                    adapter.loadMoreFail()
+                    adapter.loadMoreDataFail(pageNo)
                 }
             }
         }, 1500)

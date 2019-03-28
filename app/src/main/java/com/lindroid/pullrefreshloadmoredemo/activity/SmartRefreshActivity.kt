@@ -1,6 +1,7 @@
 package com.lindroid.pullrefreshloadmoredemo.activity
 
 import android.os.Build
+import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.DividerItemDecoration
 import android.widget.LinearLayout
@@ -48,12 +49,14 @@ class SmartRefreshActivity(override val contentViewId: Int = R.layout.activity_s
         }
         statusView.setOnRetryClickListener {
             pageNo = 1
+            adapter.data.clear()
             getDataList(isShowLoading = true)
         }
         //数据较少没有填满页面时，只能下拉不能上拉加载
         btnFew.setOnClickListener {
             pageNo = 1
-            getDataList(pageSize = 5, isShowLoading = true)
+            adapter.data.clear()
+            getDataList(pageSize = 15, isShowLoading = true)
         }
         //数据为空，不能上拉加载，但可以下拉刷新
         btnEmptyRefresh.setOnClickListener {
@@ -65,8 +68,6 @@ class SmartRefreshActivity(override val contentViewId: Int = R.layout.activity_s
             pageNo = 1
             getDataList(pageSize = 0, isShowLoading = true, canEmptyRefresh = false)
         }
-
-
     }
 
 
@@ -80,7 +81,7 @@ class SmartRefreshActivity(override val contentViewId: Int = R.layout.activity_s
             //加载时禁止下拉刷新
             rfMovie.setEnableRefresh(false)
         }
-        android.os.Handler().postDelayed({
+        Handler().postDelayed({
             //手动控制网络的链接，由于是本地数据，所以无法兼顾到服务器出错的状况
             when (isNetworkConnect()) {
                 true -> {

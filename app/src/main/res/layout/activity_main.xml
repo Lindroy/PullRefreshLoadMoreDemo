@@ -11,8 +11,22 @@
 
     <Button
         android:textAllCaps="false"
+        android:id="@+id/btnConvention"
+        android:text="@string/refresh_load_convention"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textAllCaps="false"
         android:id="@+id/btnSmart"
         android:text="@string/refresh_load_smart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textAllCaps="false"
+        android:id="@+id/btnSmartQuick"
+        android:text="@string/refresh_load_smart_quick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -23,10 +37,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:textAllCaps="false"
-        android:id="@+id/btnSmartQuick"
-        android:text="@string/refresh_load_smart_quick"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 </LinearLayout>
