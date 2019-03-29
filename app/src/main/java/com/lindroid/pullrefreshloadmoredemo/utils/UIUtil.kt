@@ -11,7 +11,14 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
  * @Description
  */
 
-
+/**
+ * 上拉加载或下拉刷新成功
+ * @param newData : 新请求的数据
+ * @param pageNo : 当前页码
+ * @param newData : 新请求的数据
+ * @param canEmptyRefresh: 页面数据为空是否允许下拉刷新
+ * @param pageSize: 每页请求的数据量
+ */
 fun <T : Any> refreshLoadMoreSuccess(
     refreshLayout: SmartRefreshLayout,
     adapter: BaseQuickAdapter<T, BaseViewHolder>,
@@ -38,17 +45,21 @@ fun <T : Any> refreshLoadMoreSuccess(
             //上拉加载，添加新数据
             adapter.addData(newData)
             if (newData.size != pageSize) {
-                //本次加载完成
-                adapter.loadMoreComplete()
-            } else {
                 //列表数据已经加载完毕，false表示会显示“没有更多数据了”的底部布局
                 adapter.loadMoreEnd(false)
+            } else {
+                //本次加载完成
+                adapter.loadMoreComplete()
             }
         }
     }
 }
 
-
+/**
+ * 上拉加载或下拉刷新失败
+ * @param pageNo : 当前页码
+ * @param canEmptyRefresh: 页面数据为空是否允许下拉刷新
+ */
 fun <T : Any> refreshLoadMoreFail(
     refreshLayout: SmartRefreshLayout,
     adapter: BaseQuickAdapter<T, BaseViewHolder>,

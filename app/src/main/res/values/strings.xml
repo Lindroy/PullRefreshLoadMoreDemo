@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PullRefreshLoadMoreDemo</string>
     <string name="refresh_load_convention">常规写法</string>
-    <string name="refresh_load_smart">SmartRefreshLayout上拉加载和刷新</string>
-    <string name="refresh_load_quick_adapter">SwipeRefreshLayout+QuickAdapter</string>
-    <string name="refresh_load_smart_quick">SmartRefresh+QuickAdapter</string>
+    <string name="refresh_load_smart">SRL上拉加载和刷新</string>
+    <string name="refresh_load_quick_adapter">SwipeRefreshLayout+BRAH</string>
+    <string name="refresh_load_smart_quick">SRL+BRAH</string>
 </resources>

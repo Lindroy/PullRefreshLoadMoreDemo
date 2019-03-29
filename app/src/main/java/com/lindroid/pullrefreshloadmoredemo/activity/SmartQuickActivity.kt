@@ -47,6 +47,7 @@ class SmartQuickActivity(override val contentViewId: Int = R.layout.activity_sma
         }
         statusView.setOnRetryClickListener {
             pageNo = 1
+            adapter.data.clear()
             getDataList(isShowLoading = true)
         }
         adapter.setOnLoadMoreListener({
@@ -55,7 +56,8 @@ class SmartQuickActivity(override val contentViewId: Int = R.layout.activity_sma
 
         btnFew.setOnClickListener {
             pageNo = 1
-            getDataList(5, true, true)
+            adapter.data.clear()
+            getDataList(5, isShowLoading = true, canEmptyRefresh = true)
         }
 
         btnEmptyRefresh.setOnClickListener {
@@ -87,25 +89,27 @@ class SmartQuickActivity(override val contentViewId: Int = R.layout.activity_sma
                 true -> {
                     shortToast("请求成功")
 //                    adapter.finishUpdateData(newData, pageNo)
-                    adapter.loadMoreDataSuccess(newData, pageNo, pageSize)
-                    rfMovie.finishRefreshWithAdapterSuccess(
-                        pageNo,
-                        adapter.data.isEmpty(),
-                        canEmptyRefresh
-                    )
+                    /*  adapter.loadMoreDataSuccess(newData, pageNo, pageSize)
+                      rfMovie.finishRefreshWithAdapterSuccess(
+                          pageNo,
+                          adapter.data.isEmpty(),
+                          canEmptyRefresh
+                      )*/
+                    refreshLoadMoreSuccess(rfMovie, adapter, newData, pageNo, canEmptyRefresh)
                     statusView.showSuccessView(adapter.data.isEmpty())
                     pageNo++
                 }
                 //请求失败
                 false -> {
                     shortToast("网络异常")
-                    rfMovie.finishRefreshWithAdapterFail(
-                        pageNo,
-                        adapter.data.isEmpty(),
-                        canEmptyRefresh
-                    )
+                    /* adapter.loadMoreDataFail(pageNo)
+                     rfMovie.finishRefreshWithAdapterFail(
+                         pageNo,
+                         adapter.data.isEmpty(),
+                         canEmptyRefresh
+                     )*/
+                    refreshLoadMoreFail(rfMovie, adapter, pageNo, canEmptyRefresh)
                     statusView.showFailedView(adapter.data.isEmpty())
-                    adapter.loadMoreDataFail(pageNo)
                 }
             }
         }, 1500)
